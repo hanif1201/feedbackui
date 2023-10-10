@@ -1,4 +1,5 @@
 import React from "react";
+
 import propTypes from "prop-types";
 
 const FeedbackStat = ({ feedback }) => {
@@ -7,11 +8,15 @@ const FeedbackStat = ({ feedback }) => {
       return acc + item.rating;
     }, 0) / feedback.length;
 
-  averageRating.toFixed(2);
   return (
     <div className="feedback-stats">
       <h4>{feedback.length} reviews</h4>
-      <h4>average Rating: {isNaN(averageRating) ? 0 : averageRating}</h4>
+      <h4>
+        average Rating:{" "}
+        {isNaN(averageRating)
+          ? 0
+          : averageRating.toFixed(1).replace(/[.,]0$/, "")}
+      </h4>
     </div>
   );
 };
