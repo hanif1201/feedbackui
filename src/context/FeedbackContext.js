@@ -4,6 +4,10 @@ import { v4 as uuidv4 } from "uuid";
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
+  const [feedbackEdit, setFeedbackEdit] = useState({
+    item: {},
+    edit: false,
+  });
   const [feedback, setFeedback] = useState([
     {
       id: 1,
@@ -33,8 +37,31 @@ export const FeedbackProvider = ({ children }) => {
       setFeedback(newFeedback);
     }
   };
+
+  const editFeedback = (item) => {
+    setFeedbackEdit({
+      item,
+      edit: true,
+    });
+  };
+
+  const updateFeedback = (id, updItem) => {
+    setFeedback(
+      feedback.map((item) => (item.id === id ? { ...item, ...updItem } : item))
+    );
+  };
+
   return (
-    <FeedbackContext.Provider value={{ feedback, deleteFeedback, addFeedback }}>
+    <FeedbackContext.Provider
+      value={{
+        feedback,
+        deleteFeedback,
+        addFeedback,
+        editFeedback,
+        feedbackEdit,
+        updateFeedback,
+      }}
+    >
       {children}
     </FeedbackContext.Provider>
   );
