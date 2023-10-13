@@ -1,6 +1,5 @@
 import { React, useContext } from "react";
 import FeedbackContext from "../context/FeedbackContext";
-import propTypes from "prop-types";
 
 const FeedbackStat = () => {
   const { feedback } = useContext(FeedbackContext);
